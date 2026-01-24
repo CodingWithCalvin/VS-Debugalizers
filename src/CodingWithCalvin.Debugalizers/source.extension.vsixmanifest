@@ -10,7 +10,7 @@
         <ReleaseNotes>https://github.com/CodingWithCalvin/VS-Debugalizers/releases</ReleaseNotes>
         <Icon>resources\logo.png</Icon>
         <PreviewImage>resources\preview.png</PreviewImage>
-        <Tags>debugger, visualizer, json, xml, jwt, base64, debug, formatting</Tags>
+        <Tags>debugger, visualizer, json, xml, jwt, base64</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Version="[17.8,19.0)" Id="Microsoft.VisualStudio.Community">

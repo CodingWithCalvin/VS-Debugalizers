@@ -4,6 +4,7 @@
 # Build results
 [Bb]in/
 [Oo]bj/
+Generated/
 [Ll]og/
 [Ll]ogs/
 

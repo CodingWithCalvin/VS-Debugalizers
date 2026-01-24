@@ -2,8 +2,8 @@
   "$schema": "http://json.schemastore.org/vsix-publish",
   "categories": [
     "coding",
-    "debugging",
-    "other"
+    "other",
+    "programming languages"
   ],
   "identity": {
     "internalName": "VS-Debugalizers"

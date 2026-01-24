@@ -1,53 +1,19 @@
-name: Publish
+name: Publish to VS Marketplace
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to publish'
-        required: true
-        type: string
+
+permissions:
+  contents: write
+  actions: read
 
 jobs:
   publish:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Restore dependencies
-        run: dotnet restore src/CodingWithCalvin.Debugalizers.slnx
-
-      - name: Build Release
-        run: dotnet build src/CodingWithCalvin.Debugalizers.slnx --configuration Release --no-restore
-
-      - name: Test
-        run: dotnet test src/CodingWithCalvin.Debugalizers.slnx --configuration Release --no-build --verbosity normal
-
-      - name: Upload to VS Marketplace
-        env:
-          VS_MARKETPLACE_PAT: ${{ secrets.VS_MARKETPLACE_PAT }}
-        run: |
-          $vsixPath = Get-ChildItem -Path "src/CodingWithCalvin.Debugalizers/bin/Release" -Filter "*.vsix" -Recurse | Select-Object -First 1 -ExpandProperty FullName
-          if ($vsixPath) {
-            Write-Host "Found VSIX: $vsixPath"
-            # Note: Actual publishing would use VsixPublisher.exe or similar
-            # This is a placeholder for the actual marketplace publishing step
-          } else {
-            Write-Error "No VSIX file found"
-            exit 1
-          }
-
-      - name: Upload VSIX to Release
-        if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: src/CodingWithCalvin.Debugalizers/bin/Release/**/*.vsix
+    uses: CodingWithCalvin/.github/.github/workflows/vsix-publish.yml@main
+    with:
+      extension-name: Debugalizers
+      display-name: 'Debugalizers'
+      marketplace-id: CodingWithCalvin.VS-Debugalizers
+      description: 'A powerful collection of debug visualizers for Visual Studio'
+      hashtags: '#debugger #visualizer'
+    secrets: inherit

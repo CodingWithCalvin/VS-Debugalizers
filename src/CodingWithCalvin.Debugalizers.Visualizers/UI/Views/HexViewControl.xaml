@@ -1,0 +1,52 @@
+<UserControl x:Class="CodingWithCalvin.Debugalizers.UI.Views.HexViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Offset Column -->
+        <TextBox x:Name="OffsetColumn"
+                 Grid.Column="0"
+                 IsReadOnly="True"
+                 FontFamily="Consolas"
+                 FontSize="12"
+                 Foreground="Gray"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 VerticalScrollBarVisibility="Hidden"
+                 TextWrapping="NoWrap"
+                 Padding="8,4"/>
+
+        <!-- Hex Column -->
+        <TextBox x:Name="HexColumn"
+                 Grid.Column="1"
+                 IsReadOnly="True"
+                 FontFamily="Consolas"
+                 FontSize="12"
+                 Background="Transparent"
+                 BorderThickness="0"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"
+                 TextWrapping="NoWrap"
+                 Padding="8,4"
+                 ScrollViewer.ScrollChanged="HexColumn_ScrollChanged"/>
+
+        <!-- ASCII Column -->
+        <TextBox x:Name="AsciiColumn"
+                 Grid.Column="2"
+                 IsReadOnly="True"
+                 FontFamily="Consolas"
+                 FontSize="12"
+                 Foreground="DarkGreen"
+                 Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
+                 BorderThickness="1,0,0,0"
+                 BorderBrush="Gray"
+                 VerticalScrollBarVisibility="Hidden"
+                 TextWrapping="NoWrap"
+                 Padding="8,4"/>
+    </Grid>
+</UserControl>

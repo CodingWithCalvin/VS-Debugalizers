@@ -1,0 +1,7 @@
+<UserControl x:Class="CodingWithCalvin.Debugalizers.UI.Views.RenderedViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <WebBrowser x:Name="WebContent"/>
+    </Grid>
+</UserControl>

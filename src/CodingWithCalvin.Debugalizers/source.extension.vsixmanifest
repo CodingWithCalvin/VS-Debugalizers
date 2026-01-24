@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="VS-Debugalizers" Version="1.0.0" Language="en-US" Publisher="Coding With Calvin" />
+        <DisplayName>Debugalizers</DisplayName>
+        <Description xml:space="preserve">A collection of debug visualizers for Visual Studio providing custom formatting, syntax highlighting, and specialized views for common data types including JSON, XML, JWT, Base64, images, and more.</Description>
+        <MoreInfo>https://github.com/CodingWithCalvin/VS-Debugalizers</MoreInfo>
+        <License>resources\LICENSE</License>
+        <GettingStartedGuide>https://github.com/CodingWithCalvin/VS-Debugalizers#readme</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/CodingWithCalvin/VS-Debugalizers/releases</ReleaseNotes>
+        <Icon>resources\logo.png</Icon>
+        <PreviewImage>resources\preview.png</PreviewImage>
+        <Tags>debugger, visualizer, json, xml, jwt, base64, debug, formatting</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Version="[17.8,19.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.8,19.0)" Id="Microsoft.VisualStudio.Community">
+            <ProductArchitecture>arm64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.8,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,19.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.Debugger.JustInTime" Version="[17.0,19.0)" DisplayName="Just-In-Time debugger" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
+    </Assets>
+</PackageManifest>

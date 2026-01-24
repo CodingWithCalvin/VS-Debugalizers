@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <RootNamespace>CodingWithCalvin.Debugalizers.Core</RootNamespace>
+        <AssemblyName>CodingWithCalvin.Debugalizers.Core</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- WPF References for ImageDecoder -->
+        <Reference Include="PresentationCore" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="System.Web" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Syntax Highlighting -->
+        <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
+
+        <!-- Parsers -->
+        <PackageReference Include="YamlDotNet" Version="15.3.0" />
+        <PackageReference Include="Tomlyn" Version="0.17.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.7.1" />
+        <PackageReference Include="Markdig" Version="0.34.0" />
+        <PackageReference Include="NCrontab" Version="3.3.3" />
+        <PackageReference Include="CsvHelper" Version="31.0.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+</Project>

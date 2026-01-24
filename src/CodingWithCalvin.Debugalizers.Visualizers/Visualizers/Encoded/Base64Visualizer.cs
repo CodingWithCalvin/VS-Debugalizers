@@ -1,0 +1,31 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using CodingWithCalvin.Debugalizers.Core;
+using Microsoft.VisualStudio.DebuggerVisualizers;
+
+[assembly: DebuggerVisualizer(
+    typeof(CodingWithCalvin.Debugalizers.Visualizers.Encoded.Base64Visualizer),
+    typeof(VisualizerObjectSource),
+    Target = typeof(string),
+    Description = "Debugalizers: Base64")]
+
+namespace CodingWithCalvin.Debugalizers.Visualizers.Encoded;
+
+/// <summary>
+/// Debug visualizer for Base64 encoded content.
+/// </summary>
+public class Base64Visualizer : BaseVisualizer
+{
+    /// <inheritdoc />
+    protected override string Title => "Base64";
+
+    /// <inheritdoc />
+    protected override VisualizerType Type => VisualizerType.Base64;
+
+    /// <inheritdoc />
+    protected override IEnumerable<ViewType> SupportedViews =>
+        new[] { ViewType.Decoded, ViewType.Hex, ViewType.Raw };
+
+    /// <inheritdoc />
+    protected override ViewType DefaultView => ViewType.Decoded;
+}

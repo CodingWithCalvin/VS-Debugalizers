@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CodingWithCalvin.Debugalizers\CodingWithCalvin.Debugalizers.csproj" />
+  <Project Path="CodingWithCalvin.Debugalizers.Core\CodingWithCalvin.Debugalizers.Core.csproj" />
+  <Project Path="CodingWithCalvin.Debugalizers.Visualizers\CodingWithCalvin.Debugalizers.Visualizers.csproj" />
+  <Project Path="CodingWithCalvin.Debugalizers.Tests\CodingWithCalvin.Debugalizers.Tests.csproj" />
+</Solution>

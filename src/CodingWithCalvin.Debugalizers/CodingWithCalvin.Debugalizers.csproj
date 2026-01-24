@@ -1,0 +1,38 @@
+<Project Sdk="CodingWithCalvin.VsixSdk/0.4.0">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <RootNamespace>CodingWithCalvin.Debugalizers</RootNamespace>
+        <AssemblyName>CodingWithCalvin.Debugalizers</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- VS SDK -->
+        <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.14.40265" />
+        <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.*" PrivateAssets="all" />
+
+        <!-- Telemetry -->
+        <PackageReference Include="CodingWithCalvin.Otel4Vsix" Version="0.2.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Visualizers are in a separate project to avoid CreatePkgDef issues with DebuggerVisualizers -->
+        <ProjectReference Include="..\CodingWithCalvin.Debugalizers.Visualizers\CodingWithCalvin.Debugalizers.Visualizers.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\resources\logo.png" Link="resources\logo.png">
+            <IncludeInVSIX>true</IncludeInVSIX>
+        </Content>
+        <Content Include="..\..\resources\Preview.png" Link="resources\preview.png">
+            <IncludeInVSIX>true</IncludeInVSIX>
+        </Content>
+        <Content Include="..\..\LICENSE" Link="resources\LICENSE">
+            <IncludeInVSIX>true</IncludeInVSIX>
+        </Content>
+    </ItemGroup>
+
+</Project>

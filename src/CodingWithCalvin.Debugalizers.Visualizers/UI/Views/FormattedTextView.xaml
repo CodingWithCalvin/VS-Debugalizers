@@ -1,0 +1,15 @@
+<UserControl x:Class="CodingWithCalvin.Debugalizers.UI.Views.FormattedTextView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit">
+    <Grid>
+        <avalon:TextEditor x:Name="TextEditor"
+                           FontFamily="Consolas"
+                           FontSize="12"
+                           IsReadOnly="True"
+                           ShowLineNumbers="True"
+                           HorizontalScrollBarVisibility="Auto"
+                           VerticalScrollBarVisibility="Auto"
+                           WordWrap="False"/>
+    </Grid>
+</UserControl>

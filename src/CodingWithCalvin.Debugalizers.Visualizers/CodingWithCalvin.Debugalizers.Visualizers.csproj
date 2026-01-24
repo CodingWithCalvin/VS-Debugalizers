@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net48</TargetFramework>
+        <RootNamespace>CodingWithCalvin.Debugalizers</RootNamespace>
+        <AssemblyName>CodingWithCalvin.Debugalizers.Visualizers</AssemblyName>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- WPF References -->
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="System.Xaml" />
+        <Reference Include="System.Web" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Debug Visualizers - this is the key reference that causes CreatePkgDef issues -->
+        <PackageReference Include="Microsoft.VisualStudio.DebuggerVisualizers" Version="17.6.1032901" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Core services (formatters, decoders, etc.) -->
+        <ProjectReference Include="..\CodingWithCalvin.Debugalizers.Core\CodingWithCalvin.Debugalizers.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Update="**\*.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <SubType>Designer</SubType>
+        </Page>
+        <Compile Update="**\*.xaml.cs">
+            <DependentUpon>%(Filename)</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+    </ItemGroup>
+
+</Project>

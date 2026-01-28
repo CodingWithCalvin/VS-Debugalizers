@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace CodingWithCalvin.Debugalizers.UI;
 public partial class VisualizerWindow : Window
 {
     private readonly string _content;
-    private readonly string _formattedContent;
+    private string _formattedContent;
     private readonly VisualizerType _type;
     private readonly IEnumerable<ViewType> _supportedViews;
     private readonly Dictionary<ViewType, RadioButton> _viewTabs;
@@ -25,6 +26,7 @@ public partial class VisualizerWindow : Window
     private ViewType _currentView;
     private UserControl _currentViewControl;
     private bool _wordWrap;
+    private readonly ViewType _defaultView;
 
     /// <summary>
     /// Initializes a new instance of the VisualizerWindow.
@@ -44,9 +46,7 @@ public partial class VisualizerWindow : Window
         _supportedViews = supportedViews;
         _viewTabs = new Dictionary<ViewType, RadioButton>();
         _currentView = defaultView;
-
-        // Pre-format content
-        _formattedContent = ContentFormatter.Format(_content, _type);
+        _defaultView = defaultView;
 
         // Initialize view factories
         _viewFactories = new Dictionary<ViewType, Func<UserControl>>
@@ -60,15 +60,39 @@ public partial class VisualizerWindow : Window
             { ViewType.Rendered, () => CreateRenderedView() },
             { ViewType.Image, () => CreateImageView() },
             { ViewType.Claims, () => CreateTableView() },
-            { ViewType.Decoded, () => CreateRawView() }
+            { ViewType.Decoded, () => CreateDecodedView() }
         };
 
+        // Show loading overlay and create tabs immediately
+        LoadingOverlay.Visibility = Visibility.Visible;
         CreateViewTabs();
-        UpdateStatistics();
-        SwitchToView(defaultView);
 
         // Keyboard shortcuts
         PreviewKeyDown += Window_PreviewKeyDown;
+
+        // Load content asynchronously
+        Loaded += VisualizerWindow_Loaded;
+    }
+
+    private async void VisualizerWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            // Format content on background thread
+            _formattedContent = await Task.Run(() => ContentFormatter.Format(_content, _type));
+
+            // Update UI on main thread
+            UpdateStatistics();
+            SwitchToView(_defaultView);
+        }
+        catch (Exception ex)
+        {
+            StatusText.Text = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            LoadingOverlay.Visibility = Visibility.Collapsed;
+        }
     }
 
     private void CreateViewTabs()
@@ -174,6 +198,81 @@ public partial class VisualizerWindow : Window
         return new ImageViewControl(_content);
     }
 
+    private UserControl CreateDecodedView()
+    {
+        var decodedContent = DecodeContent();
+        return new RawTextView(decodedContent);
+    }
+
+    private string DecodeContent()
+    {
+        try
+        {
+            return _type switch
+            {
+                VisualizerType.Base64 => EncodingDecoder.DecodeBase64(_content),
+                VisualizerType.UrlEncoded => EncodingDecoder.DecodeUrl(_content),
+                VisualizerType.HtmlEntities => EncodingDecoder.DecodeHtmlEntities(_content),
+                VisualizerType.UnicodeEscape => EncodingDecoder.DecodeUnicodeEscape(_content),
+                VisualizerType.HexString => EncodingDecoder.DecodeHexString(_content),
+                VisualizerType.GZip => DecodeGZipContent(),
+                VisualizerType.Deflate => DecodeDeflateContent(),
+                VisualizerType.Jwt => DecodeJwtPayload(),
+                _ => _content
+            };
+        }
+        catch (Exception ex)
+        {
+            return $"Error decoding content: {ex.Message}\n\nOriginal content:\n{_content}";
+        }
+    }
+
+    private string DecodeGZipContent()
+    {
+        // GZip content is typically Base64 encoded
+        var bytes = Convert.FromBase64String(_content);
+        using var inputStream = new System.IO.MemoryStream(bytes);
+        using var gzipStream = new System.IO.Compression.GZipStream(inputStream, System.IO.Compression.CompressionMode.Decompress);
+        using var reader = new System.IO.StreamReader(gzipStream);
+        return reader.ReadToEnd();
+    }
+
+    private string DecodeDeflateContent()
+    {
+        // Deflate content is typically Base64 encoded
+        var bytes = Convert.FromBase64String(_content);
+        using var inputStream = new System.IO.MemoryStream(bytes);
+        using var deflateStream = new System.IO.Compression.DeflateStream(inputStream, System.IO.Compression.CompressionMode.Decompress);
+        using var reader = new System.IO.StreamReader(deflateStream);
+        return reader.ReadToEnd();
+    }
+
+    private string DecodeJwtPayload()
+    {
+        // JWT has 3 parts: header.payload.signature - decode the payload
+        var parts = _content.Split('.');
+        if (parts.Length >= 2)
+        {
+            var header = DecodeBase64Url(parts[0]);
+            var payload = DecodeBase64Url(parts[1]);
+            return $"Header:\n{ContentFormatter.Format(header, VisualizerType.Json)}\n\nPayload:\n{ContentFormatter.Format(payload, VisualizerType.Json)}";
+        }
+        return _content;
+    }
+
+    private static string DecodeBase64Url(string base64Url)
+    {
+        // Convert Base64Url to standard Base64
+        var base64 = base64Url.Replace('-', '+').Replace('_', '/');
+        switch (base64.Length % 4)
+        {
+            case 2: base64 += "=="; break;
+            case 3: base64 += "="; break;
+        }
+        var bytes = Convert.FromBase64String(base64);
+        return System.Text.Encoding.UTF8.GetString(bytes);
+    }
+
     private void UpdateStatistics()
     {
         StatisticsText.Text = ContentFormatter.GetStatistics(_content);
@@ -181,9 +280,12 @@ public partial class VisualizerWindow : Window
         // Validation status
         var isValid = ValidateContent();
         ValidationText.Text = isValid ? "Valid" : "Invalid";
-        ValidationText.Foreground = isValid
-            ? System.Windows.Media.Brushes.Green
-            : System.Windows.Media.Brushes.Red;
+
+        var successBrush = (System.Windows.Media.SolidColorBrush)FindResource("SuccessBrush");
+        var errorBrush = (System.Windows.Media.SolidColorBrush)FindResource("ErrorBrush");
+
+        ValidationText.Foreground = isValid ? successBrush : errorBrush;
+        ValidationIndicator.Fill = isValid ? successBrush : errorBrush;
     }
 
     private bool ValidateContent()

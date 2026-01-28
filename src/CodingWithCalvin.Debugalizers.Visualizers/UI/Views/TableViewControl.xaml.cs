@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using CodingWithCalvin.Debugalizers.Visualizers;
 using CsvHelper;
 using CsvHelper.Configuration;
+using NCrontab;
 
 namespace CodingWithCalvin.Debugalizers.UI.Views;
 
@@ -39,6 +40,10 @@ public partial class TableViewControl : UserControl
                 VisualizerType.QueryString => ParseQueryString(content),
                 VisualizerType.Jwt => ParseJwt(content),
                 VisualizerType.Uri => ParseUri(content),
+                VisualizerType.Cron => ParseCron(content),
+                VisualizerType.Guid => ParseGuid(content),
+                VisualizerType.Timestamp => ParseTimestamp(content),
+                VisualizerType.IpAddress => ParseIpAddress(content),
                 _ => ParseKeyValue(content)
             };
 
@@ -278,5 +283,168 @@ public partial class TableViewControl : UserControl
         }
 
         return table;
+    }
+
+    private DataTable ParseCron(string content)
+    {
+        var table = new DataTable();
+        table.Columns.Add("Field");
+        table.Columns.Add("Value");
+        table.Columns.Add("Description");
+
+        var parts = content.Trim().Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+        var fieldNames = new[] { "Minute", "Hour", "Day of Month", "Month", "Day of Week" };
+        var fieldRanges = new[] { "0-59", "0-23", "1-31", "1-12", "0-6 (Sun-Sat)" };
+
+        for (var i = 0; i < Math.Min(parts.Length, fieldNames.Length); i++)
+        {
+            table.Rows.Add(fieldNames[i], parts[i], $"Range: {fieldRanges[i]}");
+        }
+
+        // Try to parse and show next occurrences
+        try
+        {
+            var schedule = CrontabSchedule.Parse(content);
+            var now = DateTime.Now;
+            table.Rows.Add("", "", "");
+            table.Rows.Add("Next Occurrences", "", "");
+
+            for (var i = 0; i < 5; i++)
+            {
+                var next = schedule.GetNextOccurrence(now);
+                table.Rows.Add($"  {i + 1}", next.ToString("yyyy-MM-dd HH:mm:ss"), next.ToString("dddd"));
+                now = next;
+            }
+        }
+        catch
+        {
+            table.Rows.Add("Error", "Could not parse cron expression", "");
+        }
+
+        return table;
+    }
+
+    private DataTable ParseGuid(string content)
+    {
+        var table = new DataTable();
+        table.Columns.Add("Format");
+        table.Columns.Add("Value");
+
+        if (Guid.TryParse(content.Trim(), out var guid))
+        {
+            table.Rows.Add("Standard (D)", guid.ToString("D"));
+            table.Rows.Add("No Hyphens (N)", guid.ToString("N"));
+            table.Rows.Add("Braces (B)", guid.ToString("B"));
+            table.Rows.Add("Parentheses (P)", guid.ToString("P"));
+            table.Rows.Add("Hex (X)", guid.ToString("X"));
+            table.Rows.Add("", "");
+            table.Rows.Add("Version", ((guid.ToByteArray()[7] & 0xF0) >> 4).ToString());
+            table.Rows.Add("Variant", (guid.ToByteArray()[8] & 0xC0) == 0x80 ? "RFC 4122" : "Other");
+        }
+        else
+        {
+            table.Rows.Add("Error", "Invalid GUID format");
+        }
+
+        return table;
+    }
+
+    private DataTable ParseTimestamp(string content)
+    {
+        var table = new DataTable();
+        table.Columns.Add("Format");
+        table.Columns.Add("Value");
+
+        if (long.TryParse(content.Trim(), out var timestamp))
+        {
+            var isMilliseconds = timestamp > 9999999999L;
+            var dateTime = isMilliseconds
+                ? DateTimeOffset.FromUnixTimeMilliseconds(timestamp)
+                : DateTimeOffset.FromUnixTimeSeconds(timestamp);
+
+            table.Rows.Add("Type", isMilliseconds ? "Milliseconds" : "Seconds");
+            table.Rows.Add("Unix Timestamp", timestamp.ToString());
+            table.Rows.Add("", "");
+            table.Rows.Add("UTC", dateTime.UtcDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+            table.Rows.Add("Local", dateTime.LocalDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff zzz"));
+            table.Rows.Add("ISO 8601", dateTime.ToString("O"));
+            table.Rows.Add("", "");
+            table.Rows.Add("Day of Week", dateTime.DayOfWeek.ToString());
+            table.Rows.Add("Day of Year", dateTime.DayOfYear.ToString());
+            table.Rows.Add("Week of Year", GetWeekOfYear(dateTime.DateTime).ToString());
+        }
+        else
+        {
+            table.Rows.Add("Error", "Invalid timestamp format");
+        }
+
+        return table;
+    }
+
+    private DataTable ParseIpAddress(string content)
+    {
+        var table = new DataTable();
+        table.Columns.Add("Property");
+        table.Columns.Add("Value");
+
+        if (System.Net.IPAddress.TryParse(content.Trim(), out var ip))
+        {
+            table.Rows.Add("Address", ip.ToString());
+            table.Rows.Add("Address Family", ip.AddressFamily.ToString());
+
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                // IPv4
+                var bytes = ip.GetAddressBytes();
+                var reversedBytes = new byte[bytes.Length];
+                Array.Copy(bytes, reversedBytes, bytes.Length);
+                Array.Reverse(reversedBytes);
+                table.Rows.Add("Binary", string.Join(".", bytes.Select(b => Convert.ToString(b, 2).PadLeft(8, '0'))));
+                table.Rows.Add("Decimal", BitConverter.ToUInt32(reversedBytes, 0).ToString());
+                table.Rows.Add("Hex", string.Join(":", bytes.Select(b => b.ToString("X2"))));
+                table.Rows.Add("", "");
+                table.Rows.Add("Is Private", IsPrivateIP(ip) ? "Yes" : "No");
+                table.Rows.Add("Is Loopback", System.Net.IPAddress.IsLoopback(ip) ? "Yes" : "No");
+                table.Rows.Add("Class", GetIPClass(bytes[0]));
+            }
+            else
+            {
+                // IPv6
+                table.Rows.Add("Full Form", ip.ToString());
+                table.Rows.Add("Is Loopback", System.Net.IPAddress.IsLoopback(ip) ? "Yes" : "No");
+                table.Rows.Add("Is Link Local", ip.IsIPv6LinkLocal ? "Yes" : "No");
+                table.Rows.Add("Is Site Local", ip.IsIPv6SiteLocal ? "Yes" : "No");
+            }
+        }
+        else
+        {
+            table.Rows.Add("Error", "Invalid IP address format");
+        }
+
+        return table;
+    }
+
+    private static bool IsPrivateIP(System.Net.IPAddress ip)
+    {
+        var bytes = ip.GetAddressBytes();
+        return bytes[0] == 10 ||
+               (bytes[0] == 172 && bytes[1] >= 16 && bytes[1] <= 31) ||
+               (bytes[0] == 192 && bytes[1] == 168);
+    }
+
+    private static string GetIPClass(byte firstOctet)
+    {
+        if (firstOctet < 128) return "A";
+        if (firstOctet < 192) return "B";
+        if (firstOctet < 224) return "C";
+        if (firstOctet < 240) return "D (Multicast)";
+        return "E (Reserved)";
+    }
+
+    private static int GetWeekOfYear(DateTime date)
+    {
+        var cal = CultureInfo.InvariantCulture.Calendar;
+        return cal.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
     }
 }

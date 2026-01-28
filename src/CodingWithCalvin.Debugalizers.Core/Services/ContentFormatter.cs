@@ -37,6 +37,7 @@ public static class ContentFormatter
                 VisualizerType.Yaml => FormatYaml(content),
                 VisualizerType.Toml => FormatToml(content),
                 VisualizerType.Sql => FormatSql(content),
+                VisualizerType.Regex => FormatRegex(content),
                 _ => content
             };
         }
@@ -183,6 +184,87 @@ public static class ContentFormatter
         // Clean up multiple newlines and leading whitespace
         result = System.Text.RegularExpressions.Regex.Replace(result, @"(\r?\n)+", Environment.NewLine);
         return result.TrimStart();
+    }
+
+    /// <summary>
+    /// Formats a regular expression with analysis of its components.
+    /// </summary>
+    /// <param name="regex">The regex pattern to format.</param>
+    /// <returns>The formatted regex with explanations.</returns>
+    public static string FormatRegex(string regex)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("Pattern:");
+        sb.AppendLine(regex);
+        sb.AppendLine();
+        sb.AppendLine("Analysis:");
+        sb.AppendLine(new string('-', 50));
+
+        // Common regex components and their meanings
+        var components = new (string pattern, string description)[]
+        {
+            (@"^\^", "^ - Start of string/line"),
+            (@"\$$", "$ - End of string/line"),
+            (@"\\d", "\\d - Digit [0-9]"),
+            (@"\\D", "\\D - Non-digit"),
+            (@"\\w", "\\w - Word character [a-zA-Z0-9_]"),
+            (@"\\W", "\\W - Non-word character"),
+            (@"\\s", "\\s - Whitespace"),
+            (@"\\S", "\\S - Non-whitespace"),
+            (@"\\b", "\\b - Word boundary"),
+            (@"\.", ". - Any character (except newline)"),
+            (@"\+", "+ - One or more"),
+            (@"\*", "* - Zero or more"),
+            (@"\?", "? - Zero or one (optional)"),
+            (@"\{(\d+)\}", "{n} - Exactly n times"),
+            (@"\{(\d+),\}", "{n,} - At least n times"),
+            (@"\{(\d+),(\d+)\}", "{n,m} - Between n and m times"),
+            (@"\[.*?\]", "[...] - Character class"),
+            (@"\(.*?\)", "(...) - Capturing group"),
+            (@"\(\?:.*?\)", "(?:...) - Non-capturing group"),
+            (@"\(\?=.*?\)", "(?=...) - Positive lookahead"),
+            (@"\(\?!.*?\)", "(?!...) - Negative lookahead"),
+            (@"\(\?<=.*?\)", "(?<=...) - Positive lookbehind"),
+            (@"\(\?<!.*?\)", "(?<!...) - Negative lookbehind"),
+            (@"\|", "| - Alternation (OR)"),
+        };
+
+        var foundComponents = new System.Collections.Generic.List<string>();
+        foreach (var (pattern, description) in components)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(regex, pattern))
+            {
+                foundComponents.Add(description);
+            }
+        }
+
+        if (foundComponents.Count > 0)
+        {
+            foreach (var component in foundComponents)
+            {
+                sb.AppendLine(component);
+            }
+        }
+        else
+        {
+            sb.AppendLine("(literal pattern - matches exactly)");
+        }
+
+        // Try to validate the regex
+        sb.AppendLine();
+        sb.AppendLine("Validation:");
+        sb.AppendLine(new string('-', 50));
+        try
+        {
+            var _ = new System.Text.RegularExpressions.Regex(regex);
+            sb.AppendLine("✓ Valid regex pattern");
+        }
+        catch (System.ArgumentException ex)
+        {
+            sb.AppendLine($"✗ Invalid regex: {ex.Message}");
+        }
+
+        return sb.ToString();
     }
 
     /// <summary>

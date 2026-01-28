@@ -1,0 +1,3 @@
+; Register the extension's Visualizers folder with the debugger
+[$RootKey$\Debugger\VisualizerPaths\CodingWithCalvin.Debugalizers]
+@="$PackageFolder$\Visualizers"

@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.Debugalizers"><img src="https://img.shields.io/visual-studio-marketplace/v/CodingWithCalvin.Debugalizers?style=for-the-badge&label=Marketplace" alt="Marketplace Version"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.Debugalizers"><img src="https://img.shields.io/visual-studio-marketplace/i/CodingWithCalvin.Debugalizers?style=for-the-badge&label=Installs" alt="Marketplace Installs"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.VS-Debugalizers"><img src="https://img.shields.io/visual-studio-marketplace/v/CodingWithCalvin.VS-Debugalizers?style=for-the-badge&label=Marketplace" alt="Marketplace Version"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.VS-Debugalizers"><img src="https://img.shields.io/visual-studio-marketplace/i/CodingWithCalvin.VS-Debugalizers?style=for-the-badge&label=Installs" alt="Marketplace Installs"></a>
   <a href="https://github.com/CodingWithCalvin/VS-Debugalizers/actions/workflows/build.yml"><img src="https://img.shields.io/github/actions/workflow/status/CodingWithCalvin/VS-Debugalizers/build.yml?style=for-the-badge&label=Build" alt="Build Status"></a>
 </p>
 

@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/CodingWithCalvin/VS-Debugalizers/main/resources/logo.png" alt="Debugalizers Logo" width="128" />
 </p>
 
-<h1 align="center">Debugalizers</h1>
+<h1 align="center">🔍 Debugalizers</h1>
 
 <p align="center">
   <a href="https://visualstudio.microsoft.com/"><img src="https://img.shields.io/badge/Visual%20Studio-2022%20%7C%202026-purple?style=for-the-badge&logo=visualstudio&logoColor=white" alt="Visual Studio 2022"></a>
@@ -18,11 +18,11 @@
 
 ---
 
-A **powerful collection** of debug visualizers for Visual Studio, providing beautiful formatting, syntax highlighting, and specialized views for common string data types. Stop squinting at raw JSON in the debugger!
+A **powerful collection** of debug visualizers for Visual Studio, providing beautiful formatting, syntax highlighting, and specialized views for common string data types. Stop squinting at raw JSON in the debugger! 🎯✨
 
 ---
 
-## Updated Interface
+## ✨ Updated Interface
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/CodingWithCalvin/VS-Debugalizers/main/resources/updated-interface.png" alt="Updated Debugalizers Interface" width="700" />
@@ -34,7 +34,7 @@ A **powerful collection** of debug visualizers for Visual Studio, providing beau
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/CodingWithCalvin/VS-Debugalizers/main/resources/debugalizers-list.png" alt="Debugalizers List" width="400" />
@@ -107,83 +107,83 @@ A **powerful collection** of debug visualizers for Visual Studio, providing beau
 
 ---
 
-## Features
+## 🚀 Features
 
-- **30+ Visualizers** - JSON, XML, JWT, Base64, images, and many more
-- **Multiple Views** - Raw, Formatted, Tree, Table, Hex, Rendered, and Image
-- **Syntax Highlighting** - Beautiful code highlighting via AvalonEdit
-- **Search** - Find text within large content (Ctrl+F)
-- **Copy & Export** - Copy raw/formatted content or export to file
-- **Multi-Architecture** - Supports both x64 and ARM64 systems
-
----
-
-## Visualizer Catalog
-
-### Data Formats
-
-| Visualizer | Description | Views |
-|------------|-------------|-------|
-| **JSON** | API responses, config files | Formatted, Tree, Raw |
-| **XML** | SOAP, config, SVG | Formatted, Tree, Raw |
-| **HTML** | Web content, email templates | Formatted, Rendered, Tree, Raw |
-| **YAML** | Docker, K8s, CI/CD configs | Formatted, Tree, Raw |
-| **TOML** | Rust configs, pyproject.toml | Formatted, Tree, Raw |
-| **CSV/TSV** | Tabular data exports | Table, Raw |
-| **INI** | Legacy config files | Formatted, Table, Raw |
-| **Markdown** | Documentation strings | Rendered, Raw |
-| **SQL** | Database queries | Formatted, Syntax Highlighted, Raw |
-| **GraphQL** | API queries | Formatted, Syntax Highlighted, Raw |
-
-### Encoded Data
-
-| Visualizer | Description | Views |
-|------------|-------------|-------|
-| **Base64** | Decode text from Base64 | Decoded, Hex, Raw |
-| **Base64 Image** | Embedded images (data:image/...) | Image Preview, Raw |
-| **URL Encoded** | Query strings, form data | Decoded, Raw |
-| **HTML Entities** | `&amp;` to `&`, `&lt;` to `<` | Decoded, Raw |
-| **Unicode Escape** | `\u0041` to `A` | Decoded, Raw |
-| **Hex String** | `48656C6C6F` to `Hello` | Decoded, Hex, Raw |
-| **GZip/Deflate** | Compressed payloads | Decompressed, Raw |
-
-### Security & Auth Tokens
-
-| Visualizer | Description | Views |
-|------------|-------------|-------|
-| **JWT** | Decode header, payload, expiry | Claims Table, Decoded, Raw |
-| **SAML** | Decode assertions | XML Tree, Claims, Raw |
-| **X.509 Certificate** | PEM/DER certificates | Details Table, Raw |
-
-### Structured Strings
-
-| Visualizer | Description | Views |
-|------------|-------------|-------|
-| **Connection String** | DB/service connections | Parsed Table, Raw |
-| **URI/URL** | Full URL parsing | Parsed Parts, Query Params Table |
-| **Query String** | `?foo=bar&baz=qux` | Key-Value Table, Raw |
-| **Regex** | Pattern visualization | Pattern Breakdown, Raw |
-| **Cron Expression** | Schedule expressions | Human Readable, Next Runs |
-
-### Binary & Low-Level
-
-| Visualizer | Description | Views |
-|------------|-------------|-------|
-| **Hex Dump** | Binary data as hex | Hex + ASCII |
-| **GUID/UUID** | Format and version info | Formatted, Details |
-| **Timestamp** | Unix epoch conversion | Human Readable, UTC/Local |
-| **IP Address** | IPv4/IPv6 details | Formatted, CIDR Info |
+- 🎨 **30+ Visualizers** — JSON, XML, JWT, Base64, images, and many more
+- 🌳 **Multiple Views** — Raw, Formatted, Tree, Table, Hex, Rendered, and Image
+- 🖌️ **Syntax Highlighting** — Beautiful code highlighting via AvalonEdit
+- 🔎 **Search** — Find text within large content (Ctrl+F)
+- 📋 **Copy & Export** — Copy raw/formatted content or export to file
+- 🖥️ **Multi-Architecture** — Supports both x64 and ARM64 systems
 
 ---
 
-## Installation
+## 📦 Visualizer Catalog
+
+### 📄 Data Formats
+
+| Visualizer | Description | Views |
+|------------|-------------|-------|
+| 📋 **JSON** | API responses, config files | Formatted, Tree, Raw |
+| 📰 **XML** | SOAP, config, SVG | Formatted, Tree, Raw |
+| 🌐 **HTML** | Web content, email templates | Formatted, Rendered, Tree, Raw |
+| ⚙️ **YAML** | Docker, K8s, CI/CD configs | Formatted, Tree, Raw |
+| 🔧 **TOML** | Rust configs, pyproject.toml | Formatted, Tree, Raw |
+| 📊 **CSV/TSV** | Tabular data exports | Table, Raw |
+| 📝 **INI** | Legacy config files | Formatted, Table, Raw |
+| 📖 **Markdown** | Documentation strings | Rendered, Raw |
+| 🗃️ **SQL** | Database queries | Formatted, Syntax Highlighted, Raw |
+| 🔗 **GraphQL** | API queries | Formatted, Syntax Highlighted, Raw |
+
+### 🔐 Encoded Data
+
+| Visualizer | Description | Views |
+|------------|-------------|-------|
+| 🔤 **Base64** | Decode text from Base64 | Decoded, Hex, Raw |
+| 🖼️ **Base64 Image** | Embedded images (data:image/...) | Image Preview, Raw |
+| 🔗 **URL Encoded** | Query strings, form data | Decoded, Raw |
+| 🏷️ **HTML Entities** | `&amp;` → `&`, `&lt;` → `<` | Decoded, Raw |
+| 🔡 **Unicode Escape** | `\u0041` → `A` | Decoded, Raw |
+| 🔢 **Hex String** | `48656C6C6F` → `Hello` | Decoded, Hex, Raw |
+| 📦 **GZip/Deflate** | Compressed payloads | Decompressed, Raw |
+
+### 🛡️ Security & Auth Tokens
+
+| Visualizer | Description | Views |
+|------------|-------------|-------|
+| 🎫 **JWT** | Decode header, payload, expiry | Claims Table, Decoded, Raw |
+| 🔑 **SAML** | Decode assertions | XML Tree, Claims, Raw |
+| 📜 **X.509 Certificate** | PEM/DER certificates | Details Table, Raw |
+
+### 🔗 Structured Strings
+
+| Visualizer | Description | Views |
+|------------|-------------|-------|
+| 🔌 **Connection String** | DB/service connections | Parsed Table, Raw |
+| 🌍 **URI/URL** | Full URL parsing | Parsed Parts, Query Params Table |
+| ❓ **Query String** | `?foo=bar&baz=qux` | Key-Value Table, Raw |
+| 🎯 **Regex** | Pattern visualization | Pattern Breakdown, Raw |
+| ⏰ **Cron Expression** | Schedule expressions | Human Readable, Next Runs |
+
+### 💾 Binary & Low-Level
+
+| Visualizer | Description | Views |
+|------------|-------------|-------|
+| 🔢 **Hex Dump** | Binary data as hex | Hex + ASCII |
+| 🆔 **GUID/UUID** | Format and version info | Formatted, Details |
+| 🕐 **Timestamp** | Unix epoch conversion | Human Readable, UTC/Local |
+| 🌐 **IP Address** | IPv4/IPv6 details | Formatted, CIDR Info |
+
+---
+
+## 📥 Installation
 
 ### From Visual Studio Marketplace
 
 [![VS Marketplace](https://img.shields.io/badge/VS%20Marketplace-Debugalizers-purple?style=for-the-badge&logo=visualstudio&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.VS-Debugalizers)
 
 1. Open Visual Studio 2022
-2. Go to **Extensions** > **Manage Extensions**
+2. Go to **Extensions** → **Manage Extensions**
 3. Search for "**Debugalizers**"
 4. Click **Download** and restart Visual Studio
 
@@ -204,13 +204,13 @@ dotnet test src/CodingWithCalvin.Debugalizers.slnx
 
 ---
 
-## Usage
+## 🚀 Usage
 
-1. Set a breakpoint where a string variable is in scope
-2. When the debugger hits the breakpoint, hover over the variable
-3. Click the **magnifying glass** icon in the DataTip
-4. Select the appropriate visualizer (e.g., "**Debugalizers: JSON**")
-5. The visualizer window opens with beautifully formatted content!
+1. 🔴 Set a breakpoint where a string variable is in scope
+2. ⏸️ When the debugger hits the breakpoint, hover over the variable
+3. 🔍 Click the **magnifying glass** icon in the DataTip
+4. 📋 Select the appropriate visualizer (e.g., "**Debugalizers: JSON**")
+5. ✨ The visualizer window opens with beautifully formatted content!
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/CodingWithCalvin/VS-Debugalizers/main/resources/debugalizers-list.png" alt="Selecting a Visualizer" width="500" />
@@ -218,65 +218,65 @@ dotnet test src/CodingWithCalvin.Debugalizers.slnx
   <em>Select a visualizer from the list</em>
 </p>
 
-### Keyboard Shortcuts
+### ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
 |----------|--------|
-| `Ctrl+F` | Search within content |
-| `Escape` | Close visualizer window |
+| `Ctrl+F` | 🔎 Search within content |
+| `Escape` | ❌ Close visualizer window |
 
-### Toolbar Actions
+### 🛠️ Toolbar Actions
 
 | Button | Action |
 |--------|--------|
-| **Copy** | Copy raw content to clipboard |
-| **Copy Formatted** | Copy formatted content to clipboard |
-| **Export** | Save content to a file |
-| **Word Wrap** | Toggle word wrapping |
+| 📋 **Copy** | Copy raw content to clipboard |
+| 📝 **Copy Formatted** | Copy formatted content to clipboard |
+| 💾 **Export** | Save content to a file |
+| ↩️ **Word Wrap** | Toggle word wrapping |
 
 ---
 
-## Requirements
+## 📋 Requirements
 
-- Visual Studio 2022 (17.8) or later
-- .NET Framework 4.8
+- 💻 Visual Studio 2022 (17.8) or later
+- 🔧 .NET Framework 4.8
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 | Component | Technology |
 |-----------|------------|
-| Syntax Highlighting | AvalonEdit |
-| JSON Parsing | Newtonsoft.Json |
-| YAML Parsing | YamlDotNet |
-| TOML Parsing | Tomlyn |
-| JWT Decoding | System.IdentityModel.Tokens.Jwt |
-| Markdown Rendering | Markdig |
-| Cron Parsing | NCrontab |
-| CSV Parsing | CsvHelper |
+| 🎨 Syntax Highlighting | AvalonEdit |
+| 📊 JSON Parsing | Newtonsoft.Json |
+| 📄 YAML Parsing | YamlDotNet |
+| 🔧 TOML Parsing | Tomlyn |
+| 🎫 JWT Decoding | System.IdentityModel.Tokens.Jwt |
+| 📖 Markdown Rendering | Markdig |
+| ⏰ Cron Parsing | NCrontab |
+| 📊 CSV Parsing | CsvHelper |
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! Feel free to submit issues and pull requests.
+Contributions are welcome! Feel free to submit issues and pull requests. 💪
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feat/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feat/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+1. 🍴 Fork the repository
+2. 🌿 Create a feature branch (`git checkout -b feat/amazing-feature`)
+3. 💾 Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. 📤 Push to the branch (`git push origin feat/amazing-feature`)
+5. 🎉 Open a Pull Request
 
 ---
 
-## Contributors
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Contributors
 
 <!-- readme: contributors -start -->
 [![CalvinAllen](https://avatars.githubusercontent.com/u/41448698?v=4&s=64)](https://github.com/CalvinAllen) [![lennartb-](https://avatars.githubusercontent.com/u/5563601?v=4&s=64)](https://github.com/lennartb-)
@@ -286,8 +286,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <div align="center">
 
-### If you find Debugalizers useful, please consider giving it a star!
+### ⭐ If you find Debugalizers useful, please consider giving it a star! ⭐
 
-*Made with care for the Visual Studio community from Coding With Calvin*
+*Made with ❤️ for the Visual Studio community from Coding With Calvin*
 
 </div>

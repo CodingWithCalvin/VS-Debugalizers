@@ -20,7 +20,10 @@
 
     <ItemGroup>
         <!-- Visualizers are in a separate project to avoid CreatePkgDef issues with DebuggerVisualizers -->
-        <ProjectReference Include="..\CodingWithCalvin.Debugalizers.Visualizers\CodingWithCalvin.Debugalizers.Visualizers.csproj" />
+        <ProjectReference Include="..\CodingWithCalvin.Debugalizers.Visualizers\CodingWithCalvin.Debugalizers.Visualizers.csproj">
+            <Private>true</Private>
+            <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+        </ProjectReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -34,5 +37,43 @@
             <IncludeInVSIX>true</IncludeInVSIX>
         </Content>
     </ItemGroup>
+
+    <!-- Copy visualizer assemblies to Visualizers subfolder and include in VSIX -->
+    <Target Name="CopyVisualizersToSubfolder" AfterTargets="Build" BeforeTargets="GetVsixSourceItems">
+        <PropertyGroup>
+            <VisualizersFolder>$(OutputPath)Visualizers\</VisualizersFolder>
+            <VisualizersSourceFolder>$(OutputPath)</VisualizersSourceFolder>
+        </PropertyGroup>
+        <ItemGroup>
+            <!-- Visualizer and its dependencies -->
+            <VisualizerFiles Include="$(VisualizersSourceFolder)CodingWithCalvin.Debugalizers.Visualizers.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)CodingWithCalvin.Debugalizers.Visualizers.pdb" Condition="Exists('$(VisualizersSourceFolder)CodingWithCalvin.Debugalizers.Visualizers.pdb')" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)CodingWithCalvin.Debugalizers.Core.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)CodingWithCalvin.Debugalizers.Core.pdb" Condition="Exists('$(VisualizersSourceFolder)CodingWithCalvin.Debugalizers.Core.pdb')" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)ICSharpCode.AvalonEdit.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Newtonsoft.Json.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)YamlDotNet.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Tomlyn.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)System.IdentityModel.Tokens.Jwt.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Microsoft.IdentityModel.Tokens.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Microsoft.IdentityModel.JsonWebTokens.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Microsoft.IdentityModel.Logging.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Microsoft.IdentityModel.Abstractions.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)Markdig.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)NCrontab.dll" />
+            <VisualizerFiles Include="$(VisualizersSourceFolder)CsvHelper.dll" />
+        </ItemGroup>
+        <MakeDir Directories="$(VisualizersFolder)" />
+        <Copy SourceFiles="@(VisualizerFiles)" DestinationFolder="$(VisualizersFolder)" SkipUnchangedFiles="true" />
+    </Target>
+
+    <!-- Include Visualizers folder in VSIX using VSIXSourceItem -->
+    <Target Name="IncludeVisualizersInVsix" AfterTargets="CopyVisualizersToSubfolder" BeforeTargets="GetVsixSourceItems">
+        <ItemGroup>
+            <VSIXSourceItem Include="$(OutputPath)Visualizers\**\*.*">
+                <VSIXSubPath>Visualizers</VSIXSubPath>
+            </VSIXSourceItem>
+        </ItemGroup>
+    </Target>
 
 </Project>

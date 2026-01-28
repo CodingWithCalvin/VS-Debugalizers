@@ -36,10 +36,6 @@
         <Content Include="..\..\LICENSE" Link="resources\LICENSE">
             <IncludeInVSIX>true</IncludeInVSIX>
         </Content>
-        <!-- Pkgdef to register visualizer path with debugger -->
-        <Content Include="Visualizers.pkgdef">
-            <IncludeInVSIX>true</IncludeInVSIX>
-        </Content>
     </ItemGroup>
 
     <!-- Copy visualizer assemblies to Visualizers subfolder and include in VSIX -->

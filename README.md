@@ -177,8 +177,6 @@ Contributions are welcome! Feel free to submit issues and pull requests. 💪
 4. 📤 Push to the branch (`git push origin feat/amazing-feature`)
 5. 🎉 Open a Pull Request
 
-For building locally, install the [Extensibility Essentials 2022](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ExtensibilityEssentials2022) extension.
-
 ---
 
 ## 📄 License

@@ -95,7 +95,7 @@ A **powerful collection** of debug visualizers for Visual Studio, providing beau
 
 ### From Visual Studio Marketplace
 
-[![VS Marketplace](https://img.shields.io/badge/VS%20Marketplace-Debugalizers-purple?style=for-the-badge&logo=visualstudio&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.Debugalizers)
+[![VS Marketplace](https://img.shields.io/badge/VS%20Marketplace-Debugalizers-purple?style=for-the-badge&logo=visualstudio&logoColor=white)](https://marketplace.visualstudio.com/items?itemName=CodingWithCalvin.VS-Debugalizers)
 
 1. Open Visual Studio 2022
 2. Go to **Extensions** → **Manage Extensions**

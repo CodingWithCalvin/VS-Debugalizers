@@ -34,7 +34,7 @@
 
 ---
 
-## Updated Interface
+## 🖼️ Updated Interface
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/CodingWithCalvin/VS-Debugalizers/main/resources/updated-interface.png" alt="Updated Debugalizers Interface" width="700">
@@ -44,7 +44,7 @@
 
 > **Note:** The screenshots below were captured before the UI overhaul. The updated interface shown above features a modernized design with improved theming, rounded corners, and a cleaner layout. All functionality remains the same.
 
-## Screenshots
+## 📸 Screenshots
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/CodingWithCalvin/VS-Debugalizers/main/resources/debugalizers-list.png" alt="Debugalizers List" width="400">
@@ -115,18 +115,18 @@
   </tr>
 </table>
 
-## Features
+## ✨ Features
 
-- **30+ Visualizers** - JSON, XML, JWT, Base64, images, and many more
-- **Multiple Views** - Raw, Formatted, Tree, Table, Hex, Rendered, and Image
-- **Syntax Highlighting** - Beautiful code highlighting via AvalonEdit
-- **Search** - Find text within large content (Ctrl+F)
-- **Copy & Export** - Copy raw/formatted content or export to file
-- **Multi-Architecture** - Supports both x64 and ARM64 systems
+- 🎨 **30+ Visualizers** - JSON, XML, JWT, Base64, images, and many more
+- 🌳 **Multiple Views** - Raw, Formatted, Tree, Table, Hex, Rendered, and Image
+- 🖌️ **Syntax Highlighting** - Beautiful code highlighting via AvalonEdit
+- 🔎 **Search** - Find text within large content (Ctrl+F)
+- 📋 **Copy & Export** - Copy raw/formatted content or export to file
+- 🖥️ **Multi-Architecture** - Supports both x64 and ARM64 systems
 
-## Visualizer Catalog
+## 📦 Visualizer Catalog
 
-### Data Formats
+### 📄 Data Formats
 
 | Visualizer | Description | Views |
 |------------|-------------|-------|
@@ -141,7 +141,7 @@
 | **SQL** | Database queries | Formatted, Syntax Highlighted, Raw |
 | **GraphQL** | API queries | Formatted, Syntax Highlighted, Raw |
 
-### Encoded Data
+### 🔤 Encoded Data
 
 | Visualizer | Description | Views |
 |------------|-------------|-------|
@@ -153,7 +153,7 @@
 | **Hex String** | `48656C6C6F` → `Hello` | Decoded, Hex, Raw |
 | **GZip/Deflate** | Compressed payloads | Decompressed, Raw |
 
-### Security & Auth Tokens
+### 🔐 Security & Auth Tokens
 
 | Visualizer | Description | Views |
 |------------|-------------|-------|
@@ -161,7 +161,7 @@
 | **SAML** | Decode assertions | XML Tree, Claims, Raw |
 | **X.509 Certificate** | PEM/DER certificates | Details Table, Raw |
 
-### Structured Strings
+### 🔗 Structured Strings
 
 | Visualizer | Description | Views |
 |------------|-------------|-------|
@@ -171,7 +171,7 @@
 | **Regex** | Pattern visualization | Pattern Breakdown, Raw |
 | **Cron Expression** | Schedule expressions | Human Readable, Next Runs |
 
-### Binary & Low-Level
+### 💾 Binary & Low-Level
 
 | Visualizer | Description | Views |
 |------------|-------------|-------|
@@ -180,7 +180,7 @@
 | **Timestamp** | Unix epoch conversion | Human Readable, UTC/Local |
 | **IP Address** | IPv4/IPv6 details | Formatted, CIDR Info |
 
-## Installation
+## 🛠️ Installation
 
 ### Visual Studio Marketplace
 
@@ -193,7 +193,7 @@
 
 Download the latest `.vsix` from the [Releases](https://github.com/CodingWithCalvin/VS-Debugalizers/releases) page and double-click to install.
 
-## Usage
+## 🚀 Usage
 
 1. Set a breakpoint where a string variable is in scope
 2. When the debugger hits the breakpoint, hover over the variable
@@ -207,14 +207,14 @@ Download the latest `.vsix` from the [Releases](https://github.com/CodingWithCal
   <em>Select a visualizer from the list</em>
 </p>
 
-### Keyboard Shortcuts
+### ⌨️ Keyboard Shortcuts
 
 | Shortcut | Action |
 |----------|--------|
 | `Ctrl+F` | Search within content |
 | `Escape` | Close visualizer window |
 
-### Toolbar Actions
+### 🛠️ Toolbar Actions
 
 | Button | Action |
 |--------|--------|
@@ -223,12 +223,12 @@ Download the latest `.vsix` from the [Releases](https://github.com/CodingWithCal
 | **Export** | Save content to a file |
 | **Word Wrap** | Toggle word wrapping |
 
-## Requirements
+## 📋 Requirements
 
-- Visual Studio 2022 (17.8) or later
-- .NET Framework 4.8
+- 💻 Visual Studio 2022 (17.8) or later
+- 🔧 .NET Framework 4.8
 
-## Technology Stack
+## 🏗️ Technology Stack
 
 | Component | Technology |
 |-----------|------------|
@@ -241,24 +241,24 @@ Download the latest `.vsix` from the [Releases](https://github.com/CodingWithCal
 | Cron Parsing | NCrontab |
 | CSV Parsing | CsvHelper |
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Whether it's bug reports, feature requests, or pull requests - all feedback helps make this extension better.
 
-### Development Setup
+### 🔧 Development Setup
 
 1. Clone the repository
 2. Open the solution in Visual Studio 2022 or 2026
 3. Ensure you have the "Visual Studio extension development" workload installed
 4. Press F5 to launch the experimental instance
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Contributors
+## 👥 Contributors
 
 <!-- readme: contributors -start -->
 <!-- readme: contributors -end -->

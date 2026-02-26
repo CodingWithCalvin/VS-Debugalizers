@@ -14,6 +14,4 @@ jobs:
       extension-name: Debugalizers
       display-name: 'Debugalizers'
       marketplace-id: CodingWithCalvin.VS-Debugalizers
-      description: 'A powerful collection of debug visualizers for Visual Studio'
-      hashtags: '#debugger #visualizer'
     secrets: inherit
